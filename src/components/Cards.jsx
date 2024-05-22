@@ -31,8 +31,16 @@ export default function Cards() {
                   </p>
                 </div>
               </Card.Body>
-              <Card.Footer className="border-0 px-2" style={{ backgroundColor: "#f4f5f7" }}>
-              <Button className="w-100 border-0 rounded-0 custbtn" style={{height:40}}>Add To Cart</Button>
+              <Card.Footer
+                className="border-0 px-2"
+                style={{ backgroundColor: "#f4f5f7" }}
+              >
+                <Button
+                  className="w-100 border-0 rounded-0 custbtn"
+                  style={{ height: 40 }}
+                >
+                  Add To Cart
+                </Button>
               </Card.Footer>
             </Card>
           </Col>

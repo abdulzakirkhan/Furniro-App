@@ -1,8 +1,19 @@
 import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { room } from "../assets/images";
+import { useNavigate } from "react-router-dom";
+import Carts from "../pages/Carts";
 
 export default function ShoppingCarts() {
+  const navigate=useNavigate();
+  const handleCart= () =>{
+    console.log("Cart Btn Clicked")
+    navigate("/carts")
+  }
+  const handleCheckOut =() => {
+    console.log("handleCheckOut")
+    navigate("/check-out");
+  }
   return (
     <Container>
       <Row className="g-4">
@@ -60,8 +71,8 @@ export default function ShoppingCarts() {
           <p><span>Rs: </span> <span className="t">122333</span></p>
           </div>
           <div className="d-flex justify-content-between mt-3">
-          <Button className="bg-transparent text-black rounded-4 border-black px-5">Cart</Button>
-          <Button className="bg-transparent text-black rounded-4 border-black px-5">CheckOut</Button>
+          <Button className="bg-transparent text-black rounded-4 border-black px-5" onClick={handleCart}>Cart</Button>
+          <Button className="bg-transparent text-black rounded-4 border-black px-5" onClick={handleCheckOut}>CheckOut</Button>
           </div>
         </Col>
       </Row>

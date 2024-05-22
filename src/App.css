@@ -144,7 +144,7 @@ footer{
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: red;
+  background-color: #e97171;
 }
 
 .brandSection{
@@ -154,3 +154,47 @@ footer{
   color: var(--heading-bg);
 }
 
+.formbtn{
+  height: 50px;
+}
+
+.textarea{
+  resize: none;
+}
+.row{
+  justify-content: center !important;
+}
+
+
+.soon{
+  background-color: #b88e2f;
+}
+
+.footer-btn{
+  height: 45px;
+  transition: ease 0.9s !important;
+}
+
+
+.row-tab{
+  background-color: #f9f1e7 !important;
+}
+
+.vertical-align{
+  vertical-align: middle;
+}
+
+.quantity{
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.che{
+  height: 46px;
+}
+
+.checkout-card{
+  background-color: #f9f1e7 !important;
+}

@@ -7,6 +7,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Blogs from "./pages/Blogs";
+import Carts from "./pages/Carts";
+import CheckOut from "./pages/CheckOut";
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/about-us" element={<About />} />
         <Route path="/contact-us" element={<Contact />} />
+        <Route path="/our-blogs" element={<Blogs />} />
+        <Route path="/carts" element={<Carts />} />
+        <Route path="/check-out" element={<CheckOut />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { logo } from "../assets/images";
 
 export default function Footer() {
@@ -126,6 +126,7 @@ export default function Footer() {
               <Form.Control className="mb-2" type="text" placeholder="Last Name" />
               <Form.Control className="mb-2" type="number" placeholder="Phone" />
               <Form.Control type="email" placeholder="Email" />
+              <Button className="mt-3 custbtn border-0 rounded-0 footer-btn">Send</Button>
             </Form>
           </Col>
         </Row>

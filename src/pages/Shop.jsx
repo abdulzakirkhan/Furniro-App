@@ -3,23 +3,13 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { biView, filter, line } from "../assets/icons";
 import Cards from "../components/Cards";
 import Brands from "../components/Brands";
+import SmHero from "../components/SmHero";
+import { logo } from "../assets/images";
 
 export default function Shop() {
   return (
     <section className="mt-1 pt-1">
-      <section id="shopBg">
-        <Container className="mt-5 pt-2">
-          <Row>
-            <Col md="12" className="mt-5 pt-5">
-              <h1 className="m-0 text-center">Shop</h1>
-              <p className="m-0 text-center fs-16">
-                <span>Home {">"} Shop</span>
-              </p>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-
+    <SmHero img={logo} title="Shop" location="Shop" />
       <section className="filter-section">
         <Container>
           <Row className="py-2">

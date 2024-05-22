@@ -9,6 +9,10 @@ import protection from "./protection.png";
 import quality from "./quality.png";
 import shiping from "./shiping.png";
 import support from "./support.png";
+import time from "./time.png";
+import location from "./location.png";
+import phone from "./phone.png";
+import dalete from "./dalete.png";
 export {
   heart,
   search,
@@ -21,4 +25,8 @@ export {
   quality,
   shiping,
   support,
+  time,
+  location,
+  phone,
+  dalete
 };

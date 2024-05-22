@@ -57,6 +57,14 @@ function Header() {
                   Contact
                 </Link>
               </Nav.Link>
+              <Nav.Link href="#" className="px-4 fs-16">
+                <Link
+                  to={"/our-blogs"}
+                  className="text-decoration-none text-black"
+                >
+                  Blog
+                </Link>
+              </Nav.Link>
             </Nav>
             <Form className="d-flex align-items-center gap-4">
               <div className="d-flex align-items-center gap-4">
