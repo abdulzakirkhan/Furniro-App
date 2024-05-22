@@ -150,3 +150,7 @@ footer{
 .brandSection{
   background-color: #faf3ea;
 }
+.t{
+  color: var(--heading-bg);
+}
+

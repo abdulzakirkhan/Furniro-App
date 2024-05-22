@@ -6,7 +6,14 @@ import Navbar from "react-bootstrap/Navbar";
 import { logo } from "../assets/images";
 import { heart, search, shopping, user } from "../assets/icons";
 import { Link } from "react-router-dom";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import { useState } from "react";
+import ShoppingCarts from "./ShoppingCarts";
 function Header() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <header>
       <Navbar expand="lg" className="bg-white" fixed="top">
@@ -25,16 +32,30 @@ function Header() {
               navbarScroll
             >
               <Nav.Link className="px-4 fs-16">
-                 <Link to={"/"} className="text-decoration-none text-black">Home</Link>
+                <Link to={"/"} className="text-decoration-none text-black">
+                  Home
+                </Link>
               </Nav.Link>
               <Nav.Link className="px-4 fs-16">
-                 <Link to={"/shop"} className="text-decoration-none text-black">Shop</Link>
+                <Link to={"/shop"} className="text-decoration-none text-black">
+                  Shop
+                </Link>
               </Nav.Link>
               <Nav.Link href="#" className="px-4 fs-16">
-              <Link to={"/about-us"} className="text-decoration-none text-black">About</Link>
+                <Link
+                  to={"/about-us"}
+                  className="text-decoration-none text-black"
+                >
+                  About
+                </Link>
               </Nav.Link>
               <Nav.Link href="#" className="px-4 fs-16">
-              <Link to={"/contact-us"} className="text-decoration-none text-black">Contact</Link>
+                <Link
+                  to={"/contact-us"}
+                  className="text-decoration-none text-black"
+                >
+                  Contact
+                </Link>
               </Nav.Link>
             </Nav>
             <Form className="d-flex align-items-center gap-4">
@@ -49,14 +70,34 @@ function Header() {
                   <img src={heart} alt="" width={20} />
                 </span>
               </div>
-              <Button className="bg-transparent border-0 m-0 p-0">
-                <img src={shopping} alt="" width={20} />
-              </Button>
+              <div className="">
+                <Button
+                  className="bg-transparent border-0 m-0 p-0"
+                  onClick={handleShow}
+                >
+                  <img src={shopping} alt="" width={20} />
+                </Button>
+              </div>
             </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <ResponsiveExample show={show} handleClose={handleClose} />
     </header>
+  );
+}
+function ResponsiveExample({ show, handleClose }) {
+  return (
+    <div>
+      <Offcanvas show={show} onHide={handleClose} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <ShoppingCarts />
+        </Offcanvas.Body>
+      </Offcanvas>
+    </div>
   );
 }
 
