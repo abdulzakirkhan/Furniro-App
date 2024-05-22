@@ -15,7 +15,7 @@ body {
   background-color: #ffffff;
 }
 .fs-14 {
-  font-size: 14px;
+  font-size: 14px !important;
 }
 .fs-15 {
   font-size: 15px;
@@ -114,4 +114,39 @@ footer{
 .fs-22{
   font-size: 22px;
   font-weight: bold;
+}
+
+#shopBg{
+  background-image: url("./assets/images/footer.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 43vh;
+}
+
+
+.filter-section{
+  background-color: #f9f1e7;
+}
+
+.end-12{
+  right: 14px;
+  top: 8px;
+}
+
+.topBrand{
+  width: 36px;
+  height: 36px;
+  font-size: 12px;
+  color: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.brandSection{
+  background-color: #faf3ea;
 }

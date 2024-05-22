@@ -1,18 +1,57 @@
-import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import React from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { biView, filter, line } from "../assets/icons";
+import Cards from "../components/Cards";
+import Brands from "../components/Brands";
 
 export default function Shop() {
   return (
-    <Container className="mt-5 pt-2">
-    <Row>
-    <Col md="12">
-    <h1>Hello1</h1>
-    <h1>Hello2</h1>
-    <h1>Hello3</h1>
-    <h1>Hello4</h1>
-    <h1>Hello5</h1>
-    </Col>
-    </Row>    
-    </Container>
-  )
+    <section className="mt-1 pt-1">
+      <section id="shopBg">
+        <Container className="mt-5 pt-2">
+          <Row>
+            <Col md="12" className="mt-5 pt-5">
+              <h1 className="m-0 text-center">Shop</h1>
+              <p className="m-0 text-center fs-16">
+                <span>Home {">"} Shop</span>
+              </p>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      <section className="filter-section">
+        <Container>
+          <Row className="py-2">
+            <Col md="12">
+              <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex align-items-center gap-3">
+                  <Button className="bg-transparent border-0 d-flex align-items-center gap-3 fs-13">
+                    <span>
+                      <img
+                        src={filter}
+                        alt=""
+                        className="img-fluid m-0"
+                        width={22}
+                      />
+                    </span>
+                    <span className="fs-14 mt-1 text-black">Filter</span>
+                  </Button>
+                  <span><img src={biView} alt="" className="img-fluid" width={22} /></span>
+                  <span><img src={line} alt="" className="img-fluid" width={1.5} /></span>
+                  <span className="fs-14">Showing 1-18 of 32 results</span>
+                </div>
+                <div className="d-flex align-items-center gap-3">
+                <div className="d-flex align-items-center gap-2">Show</div>
+                <span>Default</span>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+      <Cards />
+      <Brands />
+    </section>
+  );
 }
