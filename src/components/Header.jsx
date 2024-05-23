@@ -9,11 +9,15 @@ import { Link } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useState } from "react";
 import ShoppingCarts from "./ShoppingCarts";
-function Header() {
+import  Badge  from "@mui/material/Badge";
+function Header(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+
+  console.log("Header",props)
   return (
     <header>
       <Navbar expand="lg" className="bg-white" fixed="top">
@@ -79,12 +83,16 @@ function Header() {
                 </span>
               </div>
               <div className="">
+              
+                <Badge color="secondary" badgeContent={props.cardData.length} max={100}>
                 <Button
                   className="bg-transparent border-0 m-0 p-0"
                   onClick={handleShow}
                 >
                   <img src={shopping} alt="" width={20} />
                 </Button>
+                </Badge>
+            
               </div>
             </Form>
           </Navbar.Collapse>

@@ -2,7 +2,10 @@ import React from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { cardsData } from "./cardsData";
 
-export default function Cards() {
+export default function Cards(props) {
+  console.log("Shop",props)
+
+  // console.log(props)
   return (
     <Container className="py-5">
       <Row className="g-md-4 g-3">
@@ -38,6 +41,7 @@ export default function Cards() {
                 <Button
                   className="w-100 border-0 rounded-0 custbtn"
                   style={{ height: 40 }}
+                  onClick={() =>props.addToCartHandler({name:product.itemName,price:product.newPrice})}
                 >
                   Add To Cart
                 </Button>
