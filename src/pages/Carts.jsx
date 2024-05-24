@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Card, Col, Container, Row, Table } from "react-bootstrap";
+import React, { useState } from "react";
+import { Alert, Button, Card, Col, Container, Row, Table } from "react-bootstrap";
 import SmHero from "../components/SmHero";
 import { logo, room } from "../assets/images";
 import Brands from "../components/Brands";
@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeToCart } from "../ReduxStore/cartSlice";
 
 export default function Carts() {
+  const [alert, setAlert] = useState("");
   const carts = useSelector((state) => state.cart);
-
   const totalCartPrice = carts.reduce((total, cart) => total + cart.newPrice, 0);
   console.log(carts)
   const dispatch =useDispatch()
@@ -21,9 +21,12 @@ export default function Carts() {
   };
 
 
-  const handleDelete = (id) => {
-    console.log(id);
-    dispatch(removeToCart(id))
+  const handleDelete = (cart) => {
+    dispatch(removeToCart(cart.id))
+    setAlert(cart.itemName + " " + "Removed");
+    setTimeout(() => {
+      setAlert("")
+    }, 2000);
   }
 
   let totalPrice = 0;
@@ -39,59 +42,62 @@ carts.forEach((cart) => {
       <Container className="py-5 my-3">
         <Row className="">
           <Col md="8">
-            <Table borderless hover>
-              <thead className="row-tab bg-black">
-                <tr className="row-tab">
-                  <th className="row-tab text-center">Product</th>
-                  <th className="row-tab">Price</th>
-                  <th className="row-tab">Quantity</th>
-                  <th className="row-tab">Subtotal</th>
-                  <th className="row-tab"></th>
-                </tr>
-              </thead>
-              <tbody className="position-relative">
-              {carts.length > 0 ? (
-                carts.map((cart,index) => 
-                  <tr key={index}>
-                  <td>
-                      <span>
-                        <img
-                          src={cart.itemImage}
-                          alt=""
-                          className="img-fluid rounded-3"
-                          width={90}
-                        />
-                      </span>
-                      <span className="px-3 text-muted">{cart.itemName}</span>
-                    </td>
-                    <td className="vertical-align">
-                      <span className="text-muted">
-                        Rs: <span>{cart.newPrice}</span>
-                      </span>
-                    </td>
-                    <td className="vertical-align">
-                      <span className="quantity border rounded-3">{carts.length}</span>
-                    </td>
-                    <td className="vertical-align">
-                      <span>{cart.newPrice}</span>
-                    </td>
-                    <td className="vertical-align">
-                      <Button className="bg-transparent border-0" onClick={() => handleDelete(cart.id)}>
-                        <span>
-                          <img
-                            src={dalete}
-                            alt=""
-                            className="img-fluid"
-                            width={20}
-                          />
-                        </span>
-                      </Button>
-                    </td>
-                  </tr>
-                )
-              ):(<p className="position-absolute py-5 end-50 text-danger">Cart Items Not Available</p>)}
-              </tbody>
-            </Table>
+          <div className="table-responsive h-100">
+          <Table borderless hover>
+          <thead className="row-tab bg-black">
+            <tr className="row-tab">
+              <th className="row-tab text-center">Product</th>
+              <th className="row-tab">Price</th>
+              <th className="row-tab">Quantity</th>
+              <th className="row-tab">Subtotal</th>
+              <th className="row-tab"></th>
+            </tr>
+            </thead>
+            <tbody className="position-relative">
+            {alert && <Alert variant="success" className="w-100 mx-5 m-auto">{alert}</Alert>}
+          {carts.length > 0 ? (
+            carts.map((cart,index) => 
+              <tr key={index}>
+              <td>
+                  <span>
+                    <img
+                      src={cart.itemImage}
+                      alt=""
+                      className="img-fluid rounded-3"
+                      width={90}
+                    />
+                  </span>
+                  <span className="px-3 text-muted">{cart.itemName}</span>
+                </td>
+                <td className="vertical-align">
+                  <span className="text-muted">
+                    Rs: <span>{cart.newPrice}</span>
+                  </span>
+                </td>
+                <td className="vertical-align">
+                  <span className="quantity border rounded-3">{carts.length}</span>
+                </td>
+                <td className="vertical-align">
+                  <span>{cart.newPrice}</span>
+                </td>
+                <td className="vertical-align">
+                  <Button className="bg-transparent border-0" onClick={() => handleDelete(cart)}>
+                    <span>
+                      <img
+                        src={dalete}
+                        alt=""
+                        className=""
+                        width={20}
+                      />
+                    </span>
+                  </Button>
+                </td>
+              </tr>
+            )
+          ):(<p className="position-absolute py-5 end-50 text-danger">Cart Is Empty</p>)}
+          </tbody>
+        </Table>
+          </div>
           </Col>
           <Col md="4">
             <Card className="border-0 checkout-card rounded-0">

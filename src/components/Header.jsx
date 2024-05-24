@@ -13,12 +13,11 @@ import Badge from "@mui/material/Badge";
 import { useSelector } from "react-redux";
 function Header() {
   const carts = useSelector((state) => state.cart);
-  const cartsLength=carts.length;
+  const cartsLength = carts.length;
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
 
   return (
     <header>

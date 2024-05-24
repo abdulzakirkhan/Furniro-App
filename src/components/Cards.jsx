@@ -1,18 +1,25 @@
-import React from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Alert, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { cardsData } from "./cardsData";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../ReduxStore/cartSlice";
 
 export default function Cards() {
   const dispatch = useDispatch()
-
-
+  const [alert, setAlert] = useState("");
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+    setAlert(product.itemName + " " + "Add To Cart Success")
+    setTimeout(() => {
+      setAlert("")
+    }, 2000);
+  };
 
   // console.log(props)
   return (
     <Container className="py-5">
       <Row className="g-md-4 g-3">
+       {alert &&  <Alert variant="success" className="al text-center">{alert}</Alert>}
         {cardsData.map((product, index) => (
           <Col md="3" key={index}>
             <Card className="border-0 position-relative">
@@ -45,7 +52,7 @@ export default function Cards() {
                 <Button
                   className="w-100 border-0 rounded-0 custbtn"
                   style={{ height: 40 }}
-                 onClick={() =>dispatch(addToCart(product))}
+                 onClick={() =>handleAddToCart(product)}
                 >
                   Add To Cart
                 </Button>

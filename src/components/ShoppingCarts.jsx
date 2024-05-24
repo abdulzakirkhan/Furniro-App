@@ -1,11 +1,12 @@
-import React from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeToCart } from "../ReduxStore/cartSlice";
 
 export default function ShoppingCarts() {
   const carts = useSelector((state) => state.cart);
+  const [alert, setAlert] = useState("");
   const totalCartPrice = carts.reduce((total, cart) => total + cart.newPrice, 0);
   console.log(carts)
   const dispatch =useDispatch()
@@ -18,12 +19,17 @@ export default function ShoppingCarts() {
     console.log("handleCheckOut");
     navigate("/check-out");
   };
-  const handleRemove= (id) => {
-    dispatch(removeToCart(id))
+  const handleRemove= (cart) => {
+    dispatch(removeToCart(cart.id))
+    setAlert(cart.itemName + " " + "Removed from Cart")
+    setTimeout(() => {
+      setAlert("")
+    }, 2000);
   }
   return (
     <Container>
       <Row className="g-4">
+      {alert && <Alert variant="success">{alert}</Alert>}
       {carts.length > 0 ? (
         carts.map((cart, index) => (
           <Col md="12" className="p-0" key={index}>
@@ -45,7 +51,7 @@ export default function ShoppingCarts() {
                 </p>
               </div>
               <div>
-                <Button onClick={() => handleRemove(cart.id)}>x</Button>
+                <Button className="btn-danger" onClick={() => handleRemove(cart)}>x</Button>
               </div>
             </div>
           </Col>
@@ -53,35 +59,9 @@ export default function ShoppingCarts() {
       ) : (
         // If carts is empty, display a message
         <Col md="12">
-          <p>No items in the cart</p>
+          <p>Cart is Empty</p>
         </Col>
       )}
-       {/*
-       <Col md="12" className="p-0">
-         <div className="d-flex justify-content-between align-items-center p-3 rounded-3 shadow-lg">
-           <div className="img-box">
-             <img
-               src={room}
-               alt=""
-               className="img-fluid rounded-3"
-               style={{ height: "120px" }}
-             />
-           </div>
-           <div className="d-flex flex-column gap-1">
-             <h6>Asgar Sofa</h6>
-             <p>
-               <span>1</span> x{" "}
-               <span className="t">
-                 Rs: <span>2400.000</span>
-               </span>
-             </p>
-           </div>
-           <div className="">
-             <Button>x</Button>
-           </div>
-         </div>
-       </Col>
-       */} 
 
         <Col md="12" className="mt-5 pt-5">
           <div className="d-flex justify-content-between align-items-center border-bottom">
