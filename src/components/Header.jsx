@@ -5,19 +5,21 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { logo } from "../assets/images";
 import { heart, search, shopping, user } from "../assets/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useState } from "react";
 import ShoppingCarts from "./ShoppingCarts";
-import  Badge  from "@mui/material/Badge";
-function Header(props) {
+import Badge from "@mui/material/Badge";
+import { useSelector } from "react-redux";
+function Header() {
+  const carts = useSelector((state) => state.cart);
+  const cartsLength=carts.length;
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
 
-  console.log("Header",props)
   return (
     <header>
       <Navbar expand="lg" className="bg-white" fixed="top">
@@ -83,16 +85,14 @@ function Header(props) {
                 </span>
               </div>
               <div className="">
-              
-                <Badge color="secondary" badgeContent={props.cardData.length} max={100}>
-                <Button
-                  className="bg-transparent border-0 m-0 p-0"
-                  onClick={handleShow}
-                >
-                  <img src={shopping} alt="" width={20} />
-                </Button>
+                <Badge color="secondary" badgeContent={cartsLength} max={100}>
+                  <Button
+                    className="bg-transparent border-0 m-0 p-0"
+                    onClick={handleShow}
+                  >
+                    <img src={shopping} alt="" width={20} />
+                  </Button>
                 </Badge>
-            
               </div>
             </Form>
           </Navbar.Collapse>
@@ -102,10 +102,10 @@ function Header(props) {
     </header>
   );
 }
-function ResponsiveExample({ show, handleClose }) {
+function ResponsiveExample(props) {
   return (
     <div>
-      <Offcanvas show={show} onHide={handleClose} placement="end">
+      <Offcanvas show={props.show} onHide={props.handleClose} placement="end">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
         </Offcanvas.Header>

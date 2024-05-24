@@ -1,9 +1,13 @@
 import React from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { cardsData } from "./cardsData";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../ReduxStore/cartSlice";
 
-export default function Cards(props) {
-  console.log("Shop",props)
+export default function Cards() {
+  const dispatch = useDispatch()
+
+
 
   // console.log(props)
   return (
@@ -41,7 +45,7 @@ export default function Cards(props) {
                 <Button
                   className="w-100 border-0 rounded-0 custbtn"
                   style={{ height: 40 }}
-                  onClick={() =>props.addToCartHandler({name:product.itemName,price:product.newPrice})}
+                 onClick={() =>dispatch(addToCart(product))}
                 >
                   Add To Cart
                 </Button>

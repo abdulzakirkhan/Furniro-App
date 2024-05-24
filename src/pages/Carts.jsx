@@ -5,13 +5,34 @@ import { logo, room } from "../assets/images";
 import Brands from "../components/Brands";
 import { dalete } from "../assets/icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeToCart } from "../ReduxStore/cartSlice";
 
 export default function Carts() {
+  const carts = useSelector((state) => state.cart);
+
+  const totalCartPrice = carts.reduce((total, cart) => total + cart.newPrice, 0);
+  console.log(carts)
+  const dispatch =useDispatch()
   const navigate =useNavigate();
   const handleCheckOut = () => {
     console.log("handleCheckOut clicked");
     navigate("/check-out")
   };
+
+
+  const handleDelete = (id) => {
+    console.log(id);
+    dispatch(removeToCart(id))
+  }
+
+  let totalPrice = 0;
+
+// Iterate over the carts array to calculate the total price
+carts.forEach((cart) => {
+  totalPrice += cart.newPrice; // Assuming newPrice is the price of each item
+
+});
   return (
     <section className="pt-1 mt-2">
       <SmHero img={logo} title="Carts" location="Cart" />
@@ -28,43 +49,47 @@ export default function Carts() {
                   <th className="row-tab"></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
+              <tbody className="position-relative">
+              {carts.length > 0 ? (
+                carts.map((cart,index) => 
+                  <tr key={index}>
                   <td>
-                    <span>
-                      <img
-                        src={room}
-                        alt=""
-                        className="img-fluid rounded-3"
-                        width={90}
-                      />
-                    </span>
-                    <span className="px-3 text-muted">Asghard Sofa</span>
-                  </td>
-                  <td className="vertical-align">
-                    <span className="text-muted">
-                      Rs <span>25000.000</span>
-                    </span>
-                  </td>
-                  <td className="vertical-align">
-                    <span className="quantity border rounded-3">1</span>
-                  </td>
-                  <td className="vertical-align">
-                    <span>210020</span>
-                  </td>
-                  <td className="vertical-align">
-                    <Button className="bg-transparent border-0">
                       <span>
                         <img
-                          src={dalete}
+                          src={cart.itemImage}
                           alt=""
-                          className="img-fluid"
-                          width={20}
+                          className="img-fluid rounded-3"
+                          width={90}
                         />
                       </span>
-                    </Button>
-                  </td>
-                </tr>
+                      <span className="px-3 text-muted">{cart.itemName}</span>
+                    </td>
+                    <td className="vertical-align">
+                      <span className="text-muted">
+                        Rs: <span>{cart.newPrice}</span>
+                      </span>
+                    </td>
+                    <td className="vertical-align">
+                      <span className="quantity border rounded-3">{carts.length}</span>
+                    </td>
+                    <td className="vertical-align">
+                      <span>{cart.newPrice}</span>
+                    </td>
+                    <td className="vertical-align">
+                      <Button className="bg-transparent border-0" onClick={() => handleDelete(cart.id)}>
+                        <span>
+                          <img
+                            src={dalete}
+                            alt=""
+                            className="img-fluid"
+                            width={20}
+                          />
+                        </span>
+                      </Button>
+                    </td>
+                  </tr>
+                )
+              ):(<p className="position-absolute py-5 end-50 text-danger">Cart Items Not Available</p>)}
               </tbody>
             </Table>
           </Col>
@@ -80,7 +105,7 @@ export default function Carts() {
                   <span>Total</span>
                   <span className="t fs-16">
                     <span>Rs:</span>
-                    <span>2550050</span>
+                    <span>{totalCartPrice}</span>
                   </span>
                 </div>
                 <div className="text-center py-5 mt-5">
